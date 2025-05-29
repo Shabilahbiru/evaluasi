@@ -1,0 +1,285 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eaeaea;
+    color: #333;
+}
+
+/* NAVBAR DIATAS ITU */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: #4a73b8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 40px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  margin-right: 40px;
+}
+
+.navbar .nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+  color: #e91e63;
+}
+
+.hero {
+  padding-top: 80px;
+  background-image: url('/img/banner1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: calc(70vh - 60px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay {
+  background-color: rgba(255, 105, 135, 0.85);
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: fadeIN 1.5s ease-out;
+}
+
+.overlay h1 {
+  font-size: 2.8rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.overlay h2 {
+  font-size: 1.4rem;
+  color: white;
+}
+
+.intro {
+  padding: 4rem 2rem;
+  background-color: #eaeaea;
+  text-align: center;
+}
+
+.intro h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.intro p {
+  font-size: 1rem;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.cta-button {
+  background-color: #fbb034;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+  animation: slideUp 1s ease-in-out;
+}
+
+.cta-button:hover {
+  background-color: #f39600;
+}
+
+@keyframes fadeIn { 
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #eaeaea;
+  color: #555;
+  margin-top: 2rem;
+}
+
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body.login-body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(148, 174, 245, 0.6), rgba(145, 194, 250, 0.6)), 
+                url('/css/bg-kegiatan.jpg') no-repeat center center/cover;
+    backdrop-filter: blur(2px);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* CONTAINER */
+  .login-wrapper {
+    background-color: #f3f3f3;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    width: 400px;
+  }
+  
+  /* HEADER */
+  .login-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-header .logo1 {
+    width: 100px;
+    margin-bottom: 0rem;
+  }
+  
+  .login-header h1 {
+    font-size: 1.9rem;
+    color: #3b5998;
+    margin-top: 0;
+  }
+  
+  .login-header p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  /* FORM */
+  .login-form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 1rem;
+  }
+  
+  /* BUTTONS */
+  .login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .btn-login, .btn-register {
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+  }
+  
+  .btn-login {
+    background-color: #FFD600;
+    font-weight: bold;
+    color: #3b5998;
+  }
+  
+  .btn-register {
+    background-color: rgb(255, 239, 208);
+    font-weight: 600;
+    color: #bc3333;
+  }
+
+  .btn-login:hover {
+    background-color: #d4ac0d;
+  }
+
+  .btn-register:hover {
+    background-color:  rgb(232, 213, 174);
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;  
+}
+
+
+
+ 
