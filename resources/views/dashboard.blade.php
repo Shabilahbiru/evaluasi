@@ -4,125 +4,128 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="welcome-box">
+    <div class="welcome-box" style="margin-bottom: 12px;">
         <h2>Halo, {{ Auth::user()->username }}! 👋</h2>
     <div class="welcome-section">
         <div class="card-body" style="margin-top: 8px;">
-            <h3 style="margin-bottom: 5px;">Selamat Datang di Sistem Evaluasi Bakesbangpol</h3>
-            <p>Bakesbangpol Kota Bandung mendukung program sosial-politik berbasis data yang akurat dan transparan.
-            Badan Kesatuan Bangsa dan Politik (Bakesbangpol) Kota Bandung berperan dalam mendukung program-program
-            sosial-politik termasuk peningkatan partisipasi pemilih dalam pemilu. Melalui sistem ini, evaluasi
-            berbasis data mining dilakukan secara transparan dan akurat.</p>
+            <h3 style="margin-bottom: 5px;">Selamat Datang di Sistem SAPALIH Kota Bandung</h3>
+            <p>Sistem SAPALIH Kota Bandung mendukung evaluasi program pendidikan politik yang diadakan oleh Bakesbangpol Kota Bandung. 
+            Melalui sistem ini, evaluasi berbasis data mining dilakukan secara transparan dan akurat guna mendukung untuk peningkatan partisipasi pemilih dalam pemilu.</p>
         </div>
     </div>
-    </div>
-</div>
-
-<div class="containe-fluid">
-    <div class="row">
+    
+    <div class="row mt-0 mb-0">
 
         {{-- Petunjuk Penggunaan Sistem --}}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100" style="border-top: 5px solid #4f8ae2;">
-                <div class="card-body">
-                    <h5 class="card-title">📝<br> Penggunaan Sistem</h5>
-                    <p class="card-text" style="font-weight: normal;">
+
+    <div class="col-md-6 mb-0">
+            <div class="card h-80" style="border-top: 5px solid #4f8ae2; ">
+                {{-- <h5 class="card-title">📝<br> Penggunaan Sistem</h5> --}}
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseOne" style="font-size: 18px">📝 Petunjuk Penggunaan Sistem SAPALIH </a>
+                        </div>
+                        <div id="collapseOne" class="collapse" data-parent="#accordion">
+                        <div class="card-body" style="font-weight: normal;">
+                        <p class="card-text" style="font-weight: normal;">
                         Sistem ini digunakan untuk mengevaluasi partisipasi pemilih di Kota Bandung berdasarkan data pemilih yang diperoleh dari KPU.
                         <ul class="card-list" style="font-weight: normal;">
                             <li>Gunakan menu di sidebar, data pemilih dapat dikelola melalui menu "Data Pemilih"</li>
                             <li>Melakukan proses clustering menggunakan algoritma K-Means di menu "Clustering"</li>
                             <li>Membaca laporan hasil evaluasi secara visual di menu "Hasil Evaluasi"</li>
                         </ul>
-                    </p>
+                        </p>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         {{-- Aktivitas Terakhir --}}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100" style="border-top: 5px solid #4f8ae2;">
-                <div class="card-body">
-                    <h5 class="card-title">📌<br> Aktivitas Terakhir</h5>
-                    <ul class="card-text" style="font-weight: normal;">
-                        @forelse ($aktivitasTerakhir as $aktivitas)
-                            <li>{{ $aktivitas->kegiatan }} <br>
-                                <small>{{ $aktivitas->created_at->diffForHumans() }}</small>
-                            </li>
-                        @empty
-                            <li>Belum ada aktivitas</li>
-                        @endforelse
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        {{-- Program Kegiatan Bakesbangpol --}}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100" style="border-top: 5px solid #4f8ae2;">
-                <h5 class="card-title"> Program Kegiatan Bakesbangpol </h5>
+        <div class="col-md-6 mb-0">
+            <div class="card h-80" style="border-top: 5px solid #4f8ae2; ">
+                {{-- <h5 class="card-title">📌<br> Aktivitas Terakhir</h5> --}}
                 <div id="accordion">
                     <div class="card">
                         <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#collapseOne"> Pendidikan Politik </a>
+                        <a class="card-link" data-toggle="collapse" href="#collapseOne" style="font-size: 18px;">📌 Riwayat Aktivitas Pengguna </a>
                         </div>
                         <div id="collapseOne" class="collapse" data-parent="#accordion">
-                        <div class="card-body">
-                            Pendidikan politik adalah usaha yang sadar untuk mengubah proses sosialisasi politik masyarakat sehingga mereka memahami dan menghayati betul nilai-nilai yang terkandung dalam sistem politik yang ideal yang hendak dibangun.
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo"> # Beberapa Kegiatan Pendidikan Politik oleh Poldagri </a>
-                        </div>
-                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                        <div class="card-body">
-                            <ol style="text-align: left;">
-                                <li>Diskusi Politik "Perkembangan dan Dinamika Sosial Politik Masyarakat di Menjelang Pemilu dan Pilkada Serentak 2024" Kota Bandung.</li>
-                                <li>Sosialisasi penyelenggaraan pemilu dan pilkada serentak tahun 2024 bagi tenaga pengajar PKN pada SMA/SMK/MA se-Kota Bandung.</li>
-                                <li>Pendidikan politik bagi perempuan "Peran Perempuan Dalam Menyongsong Sukses Pemilu Damai 2024".</li>
-                            </ol>
+                        <div class="card-body" style="font-weight: normal;">
+                        <ul class="card-text" style="font-weight: normal;">
+                        @forelse ($aktivitasTerakhir as $aktivitas)
+                            <li>{{ $aktivitas->activity }} <br>
+                                <small class="text-muted">{{ $aktivitas->created_at->diffForHumans() }}</small>
+                            </li>
+                        @empty
+                            <li class="list-group-item">Belum ada aktivitas</li>
+                        @endforelse
+                        </ul>
                         </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+    </div>
+
 </div>
 
+@if(isset($jenisPemilu))
+  <div class="alert alert-info text-center mt-3" style="font-size: 16px;">
+    Menampilkan data berdasarkan <strong>Jenis Pemilu: {{ $jenisPemilu }}</strong>
+  </div>
+@endif
 
-    <div class="row card-summary">
-         <div class="card p-3 m-2">
+<div class="containe-fluid">
+
+    <div class="row card-summary mt-0">
+         <div class="card p-4 m-2">
+            <div class="mb-2">
+            <i class="fas fa-map-marked-alt fa-2x text-primary"></i>
+            </div>
             <h3>Jumlah Kecamatan</h3>
-            <p>{{ $jumlahKecamatan }}</p>
-        </div>
+            <p>{{ number_format($jumlahKecamatan) }}</p>
+            </div>
+       
         
-        <div class="card p-3 m-2">
+        <div class="card p-4 m-2">
+            <div class="mb-2">
+                <i class="fas fa-users fa-2x text-success"></i>
+            </div>
             <h3>Total Pemilih</h3>
-            <p>{{ $totalPemilih }}</p>
+            <p>{{ number_format($totalPemilih) }}</p>
         </div>
 
-        <div class="card p-3 m-2">
+        <div class="card p-4 m-2">
+            <div class="mb-2">
+                <i class="fas fa-male fa-2x text-info"></i>
+            </div>
             <h3>DPT Laki-laki</h3>
-            <p>{{ $dptLakilaki }}</p>
+            <p>{{ number_format($dptLakilaki) }}</p>
         </div>
 
-        <div class="card p-3 m-2">
+        <div class="card p-4 m-2">
+            <div class="mb-2">
+                <i class="fas fa-female fa-2x text-danger"></i>
+            </div>
             <h3>DPT Perempuan</h3>
-            <p>{{ $dptPerempuan }}</p>
+            <p>{{ number_format($dptPerempuan) }}</p>
         </div>
     </div>
 
     <div class="grafik-wrapper">
-    <div class="card">
-        <h3 style="margin-bottom: 20px;">Grafik Sebaran Jumlah Pemilih vs Partisipasi</h3>
-        <canvas id="scatterChart" height="400"></canvas>
+    <div class="card mb-4">
+        <h3 style="margin-bottom: 20px;">Scatter Matrix Berdasarkan Cluster</h3>
+        <div id="scatterMatrixPlot" style="width: 100%; height: 500px;"></div>
     </div>
 
     <div class="card">
         <h3 style="margin-bottom: 20px;">Grafik Partisipasi per Kecamatan</h3>
-        <canvas id="barChart" height="400"></canvas>
+        <canvas id="barChart" height="500"></canvas>
     </div>
     </div>
 
@@ -136,67 +139,70 @@
 @endpush
 
 @push('scripts')
+<script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const scatterDataRaw = @json($scatterData);
+    const fiturData = @json($fiturData);
     const partisipasiData = @json($partisipasiPerKecamatan);
 
-    const barLabels = Object.keys(partisipasiData);
-    const barValues = Object.values(partisipasiData);
+    const barLabels = partisipasiData.map(item => item.kecamatan);
+    const barValues = partisipasiData.map(item => item.total_partisipasi);
 
-    const scatterData = scatterDataRaw.map(item => ({
-        x: item.total_pemilih,
-        y: item.total_partisipasi,
-        label: item.kecamatan
-    }));
+    const suaraSah = partisipasiData.map(item => item.total_suara_sah);
+    const suaraTidakSah = partisipasiData.map(item => item.total_suara_tidak_sah);
 
-        new Chart(document.getElementById('scatterChart').getContext('2d'), {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Kecamatan',
-                data: scatterData,
-                backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                pointRadius: 6
-            }]
+    const dpt = fiturData.map(d => d.dpt_total);
+    const suara = fiturData.map(d => d.suara_total);
+    const partisipasi = fiturData.map(d => d.partisipasi);
+    const cluster = fiturData.map(d => d.cluster);
+    const kecamatan = fiturData.map(d => d.kecamatan);  // ← Tambah ini
+
+    const splomData = [{
+        type: 'splom',
+        dimensions: [
+            {label: 'DPT Total', values: dpt},
+            {label: 'Suara Total', values: suara},
+            {label: 'Partisipasi', values: partisipasi}
+        ],
+        text: kecamatan.map((kec, i) => `Kecamatan: ${kec}<br>Cluster: ${cluster[i]}`),                     // ← nama kecamatan untuk hover
+        customdata: kecamatan,              // ← data untuk klik
+        marker: {
+            color: cluster,
+            colorscale: 'OrRd',
+            showscale: true,
+            size: 8,
+            line: { color: 'white', width: 0.5 }
         },
+        hovertemplate: '%{text}<extra></extra>'  // ← tampilkan nama saat hover
+    }];
 
-        options: {
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const label = context.raw.label || '';
-                            return `${label}: (${context.raw.x}, ${context.raw.y})`;
-                        }
-                    }
-                }
-            },
+    const layout = {
+        height: 600,
+        hovermode: 'closest',
+        title: 'Cluster Berdasarkan Data Pemilih',
+        dragmode: 'select'
+    };
 
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Total Pemilih'
-                    },
-
-                    beginAtZero: true
-                },
-
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Total Partisipasi'
-                    },
-
-                    beginAtZero: true
-                }
-            }
-        }
+    Plotly.newPlot('scatterMatrixPlot', splomData, layout, {responsive: true});
+    window.addEventListener('resize', () => {
+        Plotly.Plots.resize(document.getElementById('scatterMatrixPlot'));
     });
+    setTimeout(() => {
+        Plotly.Plots.resize(document.getElementById('scatterMatrixPlot'));
+    }, 500);
+
+    // ⛳ Saat titik diklik, redirect ke hasil evaluasi wilayah
+    document.getElementById('scatterMatrixPlot')
+        .on('plotly_click', function(data) {
+            const namaKecamatan = data.points[0].customdata;
+            const url = `/hasil-evaluasi?kecamatan=${encodeURIComponent(namaKecamatan)}`;
+            window.location.href = url;
+        });
+
+
 
     new Chart(document.getElementById('barChart').getContext('2d'), {
-        type: 'bar', 
+        type: 'bar',
         data: {
             labels: barLabels,
             datasets: [{
@@ -207,17 +213,25 @@
                 borderWidth: 1
             }]
         },
-
         options: {
             responsive: true,
             plugins: {
                 tooltip: {
                     callbacks: {
-                        label: context => 'Partisipasi' + context.parsed.y
+                        label: function(context) {
+                                const i = context.dataIndex;
+                                const partisipasi = context.parsed.y;
+                                const sah = suaraSah[i];
+                                const tidakSah = suaraTidakSah[i];
+                                    return [
+                                    `Partisipasi: ${partisipasi.toFixed(2)}%`,
+                                    `Suara Sah: ${sah}`,
+                                    `Suara Tidak Sah: ${tidakSah}`
+                            ];
+                        }
                     }
                 }
             },
-
             scales: {
                 y: {
                     beginAtZero: true,
@@ -226,7 +240,6 @@
                         text: 'Jumlah Partisipasi'
                     }
                 },
-
                 x: {
                     title: {
                         display: true,

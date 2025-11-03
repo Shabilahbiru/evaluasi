@@ -106,47 +106,80 @@
                 @endif
              </h4>
         </div>
+        <div class="jenis">Jenis Pemilu: {{ session('jenis_pemilu') ?? '-' }}</div>
         <div class="tanggal">
             Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d/m/y') }}
         </div>
     </div>
 
+    <h4>Ringkasan Statistik</h4>
+    <ul>
+        <li>Total Data: {{ $totalData }}</li>
+        <li>Jumlah Cluster: {{ $jumlahCluster }}</li>
+        <li>Cluster Terbesar: Cluster {{ $clusterTerbesar }}</li>
+        <li>Rata-rata Partisipasi: {{ number_format($rataRataPartisipasi, 2) }}%</li>
+    </ul>
+
+    <h4>Distribusi Data per Cluster</h4>
+    <table class="cluster-table">
+        <thead>
+            <tr>
+                <th>Cluster</th>
+                <th>Jumlah Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($labels as $index => $label)
+            <tr>
+                <td>{{ $label }}</td>
+                <td>{{ $jumlahPerCluster[$index] }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    @if (!empty($clusterKecamatanList))
+    <h4>Daftar Kecamatan per Cluster:</h4>
+    <table style="width: 100%; border-collapse: collapse;" border="1" cellpadding="8">
+        <thead style="background-color: #f2f6fc;">
+            <tr>
+                <th style="text-align: left;">Cluster</th>
+                <th style="text-align: left;">Daftar Kecamatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($clusterKecamatanList as $item)
+                <tr>
+                    <td>Cluster {{ $item['cluster'] }}</td>
+                    <td>{{ implode(', ', $item['kecamatan']) }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@endif
+
+
+    <h4>Evaluasi</h4>
+    <p>{!! $evaluasiKesimpulan !!}</p>
+
+    <h4>Kesimpulan</h4>
+    <p>{!! $kesimpulan !!}</p>
+
+    @if (!empty($clusterDescriptions))
+    <h4>Karakteristik Tiap Cluster</h4>
+        <ul>
+            @foreach ($clusterDescriptions as $desc)
+                <li>{{ $desc }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+    <hr style="margin-top: 40px;">   
+    <p style="font-size: 12px; color: #555;">
+    <strong>Catatan:</strong><br>
+    Laporan ini dihasilkan berdasarkan hasil clustering data pemilih untuk jenis pemilu <strong>{{ session('jenis_pemilu') ?? 'Presiden' }}</strong>.
+    Jika Anda ingin menghasilkan laporan untuk jenis pemilu lain, silakan lakukan proses clustering ulang terlebih dahulu.
+    </p>
    
-    <div class="section summary">
-        <div class="card">Total Data: <span class="highlight">{{ $totalData }}</span></div>
-        <div class="card">Jumlah Cluster: <span class="highlight">{{ $jumlahCluster }}</span></div>
-        <div class="card">Cluster Terbesar: <span class="higlight">Cluster {{ $clusterTerbesar }}</span></div>
-        <div class="card">Rata-rata Partisipasi: <span class="highlight">{{ $rataRataPartisipasi }}%</span></div>
-    </div>
-
-    <div class="section">
-        <h3>Distribusi Data per Cluster: </h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Cluster</th>
-                    <th>Jumlah Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($labels as $i =>$label)
-                <tr>
-                    <td>{{ $label }}</td>
-                    <td>{{ $jumlahPerCluster[$i] }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section">
-        <h3>Evaluasi</h3>
-        <p>{!! $evaluasiKesimpulan !!}</p>
-    </div>
-
-    <div class="section">
-        <h3>Kesimpulan Umum</h3>
-        <p>{{ $kesimpulan }}</p>
-    </div>
 </body>
 </html>

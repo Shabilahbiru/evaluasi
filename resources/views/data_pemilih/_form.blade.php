@@ -4,11 +4,6 @@
 </div>
 
 <div class="form-group" style="margin-bottom: 2px">
-    <label for="kelurahan" style="display: block; margin-bottom: 5px;">Kelurahan</label>
-    <input type="text" name="kelurahan" id="kelurahan" placeholder="Masukkan Kelurahan" class="form-control" value="{{ old('kelurahan', $data->kelurahan) }}" required><br>
-</div>
-
-<div class="form-group" style="margin-bottom: 2px">
     <label for="dpt_laki_laki">DPT Laki-laki</label>
     <input type="number" name="dpt_laki_laki" id="dpt_laki_laki" placeholder="Masukkan DPT Laki-laki" class="form-control" value="{{ old('dpt_laki_laki', $data->dpt_laki_laki) }}" required><br>
 </div>

@@ -7,7 +7,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/pengaturan.css') }}">
 <div class="container-pengaturan">
-    <h3>Pengaturan Akun</h3>
+    <h3>Edit Profile</h3>
 
     @if(session('success'))
     <script>
@@ -36,16 +36,13 @@
     @endif
         <input type="file" name="foto">
 
-        <br>
-
     @if(Auth::user()->foto)
-        <div class="mb-2">
-            <input type="checkbox" name="hapus_foto" id="hapus_foto" value="1">
-            <label for="hapus_foto">Hapus foto profil dan kembali ke default</label>
+        <div class="form-check mt-3 mb-3">
+        <input class="form-check-input" type="checkbox" name="hapus_foto" id="hapus_foto">
+        <label class="form-check-label" for="hapus_foto">Hapus foto profil</label>
         </div>
     @endif
-
-
+    
     <button type="submit">Simpan Perubahan</button>
     </form>
 

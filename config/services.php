@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ocr' => [
+        'key' => env('OCR_SPACE_API_KEY'),
+    ],
+
 ];

@@ -21,10 +21,38 @@
 
 
     <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-        <div class="card">Total Data: {{ $totalData }}</div>
-        <div class="card">Jumlah Cluster: {{ $jumlahCluster }}</div>
-        <div class="card">Cluster Tertnggi: Cluster {{ $clusterTerbesar }}</div>
-        <div class="card">Rata-rata Partisipasi: {{ number_format($rataRataPartisipasi, 2) }}%</div>    
+        <div class="card p-3 d-flex align-items-center" style="min-width: 250px;">
+            <i class="fas fa-database fa-2x text-primary me-3"></i>
+            <div>
+                <div><strong>Total Data: </strong></div>
+                <div>{{ $totalData }}</div>
+            </div>
+        </div>
+
+        <div class="card p-3 d-flex align-items-center" style="min-width: 250px;">
+            <i class="fas fa-layer-group fa-2x text-success me-3"></i>
+            <div>
+                <div><strong>Jumlah Cluster:</strong></div>
+                <div>{{ $jumlahCluster }}</div>
+            </div>  
+        </div>
+
+        <div class="card p-3 d-flex align-items-center" style="min-width: 250px;">
+            <i class="fas fa-chart-line fa-2x text-danger me-3"></i>
+            <div>
+                <div><strong>Cluster Tertnggi: </strong></div>
+                <div>Cluster {{ $clusterTerbesar }}</div>
+            </div>
+        </div>
+        
+
+        <div class="card p-3 d-flex align-items-center" style="min-width: 250px;">
+            <i class="fas fa-percent fa-2x text-warning me-3"></i>
+            <div>
+                <div><strong>Rata-rata Partisipasi:</strong></div>
+                <div>{{ number_format($rataRataPartisipasi, 2) }}%</div>
+            </div>
+        </div>    
     </div>
 
     <div class="card" style="margin-bottom: 30px;">
@@ -39,13 +67,12 @@
         <p style="font-weight: normal;">{!! $evaluasiKesimpulan !!}</p>
         </div>
     </div>
-        <div class="col-sm-8">
+    <div class="col-sm-8">
             <div class="card h-100" style="margin-top: 0;">
         <h4>Kesimpulan</h4>
-        <p style="font-weight: normal;">{{ $kesimpulan }}</p>
+        <p style="font-weight: normal;">{!! $kesimpulan !!}</p>
         </div>
     </div>
-    
     </div>
 
     <div class="card" style="margin-top: 30px;">
@@ -53,13 +80,60 @@
         <canvas id="suaraBarChart" height="400"></canvas>
     </div>
 
-    <div class="card" style="margin-top: 30px;">
-        <h4 style="margin-bottom: 20px;">Visualisasi Jumlah Data per Cluster</h4>
-        <canvas id="pieChart" width="300" height="300" style="max-width: 400px; margin: auto;" ></canvas>
-    </div>
+    <div class="row mt-4">
+        <!-- Kolom Pie Chart -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <div class="text-center">
+                <h5 style="margin-bottom: 15px;">Visualisasi Jumlah Data per Cluster</h5>
+                <canvas id="pieChart" width="300" height="300"></canvas> {{-- Ukuran dikecilkan --}}
+            </div>
+        </div>
 
-   
+        <!-- Kolom Kesimpulan Intervensi -->
+        <div class="col-md-6">
+            <div class="card-body text-start">
+            <h5 class="card-title text-danger text-center">
+            <i class="fas fa-exclamation-circle"></i> Intervensi Wilayah</h5>
+
+        @php
+            $wilayahKurang = collect($rankingKecamatan)
+                ->where('kategori', 'kurang')
+                ->pluck('kecamatan')
+                ->toArray();
+        @endphp
+
+        @if(count($wilayahKurang) > 0)
+            <p style="text-align: justify;">
+                Berdasarkan hasil <strong>clustering partisipasi pemilih</strong>, terdapat <strong>{{ count($wilayahKurang) }}</strong> kecamatan yang tergolong dalam 
+            <span class="badge bg-danger">Cluster Partisipasi Kurang</span>.
+                Wilayah ini berpotensi membutuhkan <em>intervensi khusus</em> atau <em>pendidikan politik tambahan</em> dari pihak Bakesbangpol.</p>
+
+            <p style="text-align: justify;">
+                Kecamatan-kecamatan tersebut antara lain: 
+            <strong>{{ implode(', ', $wilayahKurang) }}.</strong></p>
+
+            <p style="text-align: justify;">
+                Disarankan dilakukan program peningkatan partisipasi pemilih di wilayah tersebut, seperti penyuluhan, pelibatan tokoh masyarakat, atau inovasi kegiatan.
+            </p>
+        @else
+            <p class="text-muted">
+                Seluruh wilayah menunjukkan tingkat partisipasi cukup hingga tinggi. Tidak ada wilayah yang tergolong dalam kategori rendah.
+            </p>
+        @endif
+        </div>
+    </div>
 </div>
+</div>
+
+<div class="container my-4">
+    <div class="d-flex justify-content-end">
+        <a href="{{ route('clustering.index', ['jenis_pemilu' => $jenisPemilu]) }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Kembali ke Clustering
+        </a>
+    </div>
+</div>
+
+
 @endsection
 
 @section('scripts')
@@ -102,12 +176,16 @@
             }
         });
     });
+
     const pieCtx = document.getElementById('pieChart');
     if (pieCtx) {
+        const clusterKategori = @json($clusterKategori);
+        const pieLabels = Object.keys(clusterKategori).map(i => `Cluster ${i} (${clusterKategori[i]})`);
+
         new Chart(pieCtx, {
             type: 'pie',
             data: {
-                labels: {!! json_encode($labels) !!},
+                labels: pieLabels,
                 datasets: [{
                     data: {!! json_encode($jumlahPerCluster) !!},
                     backgroundColor: ['#3498db', '#e67e22', '#2ecc71', '#9b59b6', '#f1c40f']
@@ -116,7 +194,7 @@
             options: {
                 responsive: true
             }
-        })
+        });
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -163,6 +241,65 @@
             }
         });
     });
+
+     const ctxRanking = document.getElementById('rankingChart').getContext('2d');
+    const rankingData = @json($rankingKecamatan);
+
+    const labels = rankingData.map(item => item.kecamatan);
+    const values = rankingData.map(item => item.partisipasi);
+    const clusterLabels = rankingData.map(item => item.kategori);
+    
+    const clusterColors = {
+        'Tinggi': 'rgba(40, 167, 69, 0.8)',
+        'Cukup': 'rgba(255, 193, 7, 0.8)',
+        'Rendah': 'rgba(220, 53, 69, 0.8)'
+    };
+
+    const backgroundColors = clusterLabels.map(kat => clusterColors[kat]);
+
+    new Chart(ctxRanking, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Partisipasi (%)',
+                data: values,
+                backgroundColor: backgroundColors,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const index = context.dataIndex;
+                            return `${rankingData[index].kecamatan}: ${rankingData[index].partisipasi}% | Cluster: ${rankingData[index].cluster} (${rankingData[index].kategori})`;
+                        }
+                    }
+                },
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Partisipasi (%)'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Kecamatan'
+                    }
+                }
+            }
+        }
+    });
+
 </script>
 @endsection
 

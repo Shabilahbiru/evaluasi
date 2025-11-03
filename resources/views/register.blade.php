@@ -7,6 +7,7 @@
     <title>Register Evaluasi Partisipasi Bakesbangpol</title>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body class="login-body">
     <div class="login-wrapper">
@@ -35,9 +36,15 @@
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email" required>
                 <label>Password</label>
-                <input type="password" name="password" placeholder="Password" required>
+                <div class="password-container" style="position: relative; display: flex; align-items: center;">
+                <input type="password" id="password" name="password" placeholder="Masukkan Password" required style="flex: 1; padding-right: 40px; height: 40px;">
+                <i id="togglePassword" class="fa-solid fa-eye-slash" style="position: absolute; top: 13px; right: 10px; font-size: 14px; color: #555; cursor: pointer;"></i>
+                </div>
                 <label>Konfirmasi Password</label>
-                <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
+                <div class="password-container" style="position: relative; display: flex; align-items: center;">
+                <input type="password" id="password" name="password_confirmation" placeholder="Konfirmasi Password" required style="flex: 1; padding-right: 40px; height: 40px;">
+                <i id="togglePassword" class="fa-solid fa-eye-slash" style="position: absolute; top: 13px; right: 10px; font-size: 14px; color: #555; cursor: pointer;"></i>
+                </div>
 
                 <div class="login-actions">
                     <button type="submit" class="btn-login">Register</button>
@@ -69,5 +76,20 @@
     });
 </script>
 @endif
+
+<script>
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+
+  togglePassword.addEventListener('click', function () {
+    const isPassword = passwordInput.type === 'password';
+    passwordInput.type = isPassword ? 'text' : 'password';
+
+    // Ganti ikon antara mata biasa dan mata dicoret
+    this.classList.toggle('fa-eye-slash'); // coret
+    this.classList.toggle('fa-eye');       // mata biasa
+  });
+</script>
+
 </body>
 </html>

@@ -137,7 +137,7 @@ body {
 
 /* ======= SIDEBAR ======= */
 .sidebar {
-  width: 200px;
+  width: auto;
   background-color: #4a73b8;
   color: white;
   padding: 1rem 1rem;
@@ -313,7 +313,7 @@ table.table th {
 }
 
 .btn-upload {
-  background-color: #8dcf86;
+  background-color: #4caf50;
 }
 
 .btn-upload:hover {
@@ -321,7 +321,7 @@ table.table th {
 }
 
 .btn-download {
-  background-color: #8dcf86;
+  background-color: #4caf50;
   text-decoration: none;
 }
 
@@ -474,3 +474,5 @@ table.table th {
   float: right;
   margin-bottom: 10px;
 }
+
+

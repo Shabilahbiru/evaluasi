@@ -13,7 +13,6 @@ class DataPemilih extends Model
 
     protected $fillable = [
         'kecamatan',
-        'kelurahan',
         'dpt_laki_laki',
         'dpt_perempuan',
         'dpt_total',
@@ -21,5 +20,7 @@ class DataPemilih extends Model
         'suara_tidak_sah',
         'suara_total',
         'partisipasi',
+        'jenis_pemilu',
+        'scan_file',
     ];
 }

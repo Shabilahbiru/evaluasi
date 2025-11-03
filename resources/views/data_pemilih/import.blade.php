@@ -8,7 +8,7 @@
     <div class="alert-success">{{ session('success') }}</div>
     @endif
     
-    <form action="{{ route('data_pemilih.import') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('data-pemilih.import') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="file" name="file" required>
     <button type="submit" class="btn-import">Upload</button>
